@@ -7,7 +7,7 @@ import numpy
 
 # This script will extract specific
 
-# Usage: run ampliconseq_genotyper.py from directory containing trimmed sample directories.  
+# Usage: run ampliconseq_genotyper.py from directory containing trimmed sample directories. Results are printed to screen (stdout) 
 # 1) update samples variable to select one file per directory. ampliconseq_genotyper.py should be run from the directory containing trimmed sample directories.
 # 2) update left and right flanking sequences below to your specific locus of interest. The left flank must be directly flanking the genotyped sequence.
 #   Note: longer sequences may result in higher specificity, but less sensitivity because imperfect matches are thrown out.
