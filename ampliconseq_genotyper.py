@@ -5,23 +5,16 @@ import subprocess
 import string
 import numpy
 
-# This script will extract specific
-
-# Usage: run ampliconseq_genotyper.py from directory containing trimmed sample directories. Results are printed to screen (stdout) 
-# 1) update samples variable to select one file per directory. ampliconseq_genotyper.py should be run from the directory containing trimmed sample directories.
-# 2) update left and right flanking sequences below to your specific locus of interest. The left flank must be directly flanking the genotyped sequence.
-#   Note: longer sequences may result in higher specificity, but less sensitivity because imperfect matches are thrown out.
-# 3) update base_pairs_genotyped to how many bps you want to examine in your data
-# 4) update min_percent_coverage_per_allele. A lower percent (e.g. 0.1) will report more allelic variants and a higher percent reports only the most common ones.
+# Usage: run ampliconseq_genotyper.py from directory containing trimmed sample directories.  
+# 1) update left and right flanking sequences below to your specific locus of interest. The left flank must be directly flanking the genotyped sequence.
 
 #This selects one file from each sample directory as input (in this case pe1)
 samples = glob.glob("*/trim_pe1*")
 
-left_flank = "GATAGGAAAC"
-right_flank = "GTCGTAAGT"
+left_flank = "GATAGGAAAC" #Ctar kdr_L
+right_flank = "GTCGTAAGT" # Ctar kdr_R
+# ace-1 : primer: "CCGTCATGCTGTGGAT" in trimmed_read and R: "TTCTACTCC" in trimmed_read and L: "CGGGGGC" in trimmed_read:
 
-base_pairs_genotyped = 3 #I want the entire codon for kdr and ACE 
-min_percent_coverage_per_allele = 0.1 # I only want to report the frequencies of the major alleles for readability.
 
 # make reverse complement
 old_chars = "ACGT"
@@ -87,7 +80,7 @@ def make_genotype_list(glob_trimmed_read_file_per_sample, L, R, basepairs,allele
     return [GT_list,numpy.mean(reads_per_sample_list)]
 
 
-genotype_info = make_genotype_list(samples, left_flank, right_flank, base_pairs_genotyped, min_percent_coverage_per_allele)
+genotype_info = make_genotype_list(samples, left_flank, right_flank, 3,0.1)
 codon_list = genotype_info[0]
 ave_depth = genotype_info[1]
 
